@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create</title>
+  <link rel="stylesheet" th:href="@{../css/tvs.css}">
+</head>
+<body>
+  <form th:insert="tvs/form :: form" th:method="post" th:action="@{/tvs/new}" th:object="${tv}">
+  </form>
+
+  <a th:href="@{/tvs}">Menu</a>
+
+  <div th:replace="user-menu :: menu"></div>
+</body>
+</html>

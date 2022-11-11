@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Menu</title>
+  <link rel="stylesheet" th:href="@{css/tvs.css}">
+</head>
+<body>
+  <h2>Televisions</h2>
+  <h3>Menu</h3>
+  <ul class="unstyled-list">
+
+    <li sec:authorize="hasRole('ROLE_ADMIN')">
+      <a th:href="@{/tvs/new}">Create</a>
+    </li>
+
+    <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+      <a th:href="@{/tvs/show}">Show</a>
+    </li>
+
+    <li sec:authorize="hasRole('ROLE_ADMIN')">
+      <a th:href="@{/tvs/select}">Update</a>
+    </li>
+
+    <li sec:authorize="hasRole('ROLE_ADMIN')">
+      <a th:href="@{/tvs/delete}">Delete</a>
+    </li>
+
+    <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+      <a th:href="@{/tvs/find-by-width-and-height}">Find by Width and Height</a>
+    </li>
+  </ul>
+
+  <a th:href="@{/}">Home</a>
+
+  <div th:replace="user-menu :: menu"></div>
+</body>
+</html>

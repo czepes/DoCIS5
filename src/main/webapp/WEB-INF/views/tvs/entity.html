@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Entity</title>
+</head>
+<body>
+  <div th:fragment="entity(editable, deletable)">
+    <div th:if="${tv == null}">
+      <h2>Television not found</h2>
+      <p>Television with ID <span th:text="${id}"></span> was not found</p>
+    </div>
+    <div th:if="${tv != null}" class="container">
+      <p>ID: <span th:text="${tv.id}">ID</span></p>
+      <p>Model: <span th:text="${tv.model}">model</span></p>
+      <p>Producer: <span th:text="${tv.producer}">producer</span></p>
+      <p>Production country: <span th:text="${tv.productionCountry}">production country</span></p>
+      <p>Width: <span th:text="${tv.width}">width</span></p>
+      <p>Height: <span th:text="${tv.height}">height</span></p>
+      <div th:if="${editable or deletable}">
+        <hr>
+        <a th:if="${editable}" th:href="@{/tvs/{id}/edit(id=${tv.id})}">Edit</a>
+        <form th:if="${deletable}" th:method="post" th:action="@{/tvs/{id}/delete(id=${tv.id})}">
+          <input type="submit" value="Delete">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div th:fragment="editable-entity">
+    <div th:if="${tv == null}">
+      <h2>Television not found</h2>
+      <p>Television with ID <span th:text="${id}"></span> was not found</p>
+    </div>
+    <div th:if="${tv != null}" class="container">
+      <p>ID: <span th:text="${tv.id}">ID</span></p>
+      <p>Model: <span th:text="${tv.model}">model</span></p>
+      <p>Producer: <span th:text="${tv.producer}">producer</span></p>
+      <p>Production country: <span th:text="${tv.productionCountry}">production country</span></p>
+      <p>Width: <span th:text="${tv.width}">width</span></p>
+      <p>Height: <span th:text="${tv.height}">height</span></p>
+      <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <hr>
+        <a th:href="@{/tvs/{id}/edit(id=${tv.id})}">Edit</a>
+        <form th:method="post" th:action="@{/tvs/{id}/delete(id=${tv.id})}">
+          <input type="submit" value="Delete">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="user-menu :: menu"></div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Television</title>
+  <link rel="stylesheet" th:href="@{../css/tvs.css}">
+</head>
+<body>
+
+  <div th:insert="tvs/entity :: entity (${#authorization.expression('hasRole(''ROLE_ADMIN'')')}, ${#authorization.expression('hasRole(''ROLE_ADMIN'')')})">
+  </div>
+
+  <a th:href="@{/tvs}">Menu</a>
+
+  <div th:replace="user-menu :: menu"></div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>User Menu</title>
+  <link rel="stylesheet" th:href="@{css/tvs.css}">
+</head>
+<body>
+  <footer th:fragment="menu">
+    <hr>
+    <div sec:authorize="isAuthenticated()">
+      <span>Roles:</span>
+      <ul th:each="role : ${#authentication.principal.getAuthorities()}" class="unstyled-list">
+        <li th:text="${role.getAuthority()}">
+          ROLE
+        </li>
+      </ul>
+    </div>
+    <ul class="unstyled-list">
+      <li sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}">Log in</a>
+      </li>
+      <li sec:authorize="!isAuthenticated()">
+        <a th:href="@{/register}">Register</a>
+      </li>
+      <li sec:authorize="isAuthenticated()">
+        <a th:href="@{/logout}">Log out</a>
+      </li>
+    </ul>
+  </footer>
+</body>
+</html>

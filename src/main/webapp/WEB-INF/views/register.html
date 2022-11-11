@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" th:href="@{css/tvs.css}">
+</head>
+<body>
+  <h1>Registration Form</h1>
+
+  <form th:action="@{/register}" th:method="post" th:object="${user}">
+    <div>
+      <label for="username">Username: </label>
+      <input type="text" th:field="*{username}" id="username">
+      <div class="error-message" th:if="${#fields.hasErrors()}" th:errors="*{username}">
+        Username error
+      </div>
+      <div class="error-message" th:if="${userExists}" th:text="${userExists}">
+        User exists
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password: </label>
+      <input type="password" th:field="*{password}" id="password">
+      <div class="error-message" th:if="${#fields.hasErrors()}" th:errors="*{password}">
+        Password error
+      </div>
+    </div>
+
+    <ul class="unstyled-list">
+      <li th:each="role : ${roles}">
+        <input type="radio" th:field="*{regRole}" th:value="${role.id}" th:id="${role.authority}">
+        <label th:for="${role.authority}" th:text="${role.authority}">ROLE_NAME</label>
+      </li>
+    </ul>
+    <input type="submit" value="Register">
+  </form>
+
+  <a th:href="@{/login}">Already registered? Log in</a>
+  <a th:href="@{/}">Home</a>
+</body>
+</html>
