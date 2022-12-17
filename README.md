@@ -2,9 +2,13 @@
 
 Development of Corporate Information Systems Laboratory #5.
 
-## Database
+### Database
 
-Run `init.sql` to create tables and fill them with test values.
+The database is accessed using Spring Data JPA with Hibernate.
+
+Run [`init.sql`](init.sql) to create table and fill it with test values.
+
+Configure Database connection in [`data.properties`](src/main/resources/application.properties).
 
 ## Spring Security
 ### Purpose of work
